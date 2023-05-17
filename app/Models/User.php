@@ -12,13 +12,46 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public function getNameAttribute()
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
+
+
+    const GENDER_CODE_MALE = 1;
+    const GENDER_CODE_FEMALE = 2;
+
+    public function getGenderAttribute()
+    {
+        if ($this->gender_code === self::GENDER_CODE_MALE) {
+            return 'male';
+        } elseif ($this->gender_code === self::GENDER_CODE_FEMALE) {
+            return 'female';
+        } else {
+            return null;
+        }
+    }
+
+    protected $appends = ['gender','name'];
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
+        'father_name',
+        'personel_code',
+        'identity_no',
+        'code_melli',
+        'birth_year',
+        'birth_month',
+        'birth_day',
+        'birth_date',
+        'gender_code',
+
         'email',
         'password',
     ];
