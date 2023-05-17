@@ -13,20 +13,21 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->string('code_melli')->unique();
+            $table->string('phone_number')->unique();
 
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('father_name');
-            $table->string('personel_code');
-            $table->string('identity_no');
-            $table->string('code_melli');
-            $table->unsignedSmallInteger('birth_year');
-            $table->unsignedTinyInteger('birth_month');
-            $table->unsignedTinyInteger('birth_day');
-            $table->date('birth_date');
-            $table->tinyInteger('gender_code')->unsigned();
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('father_name')->nullable();
+            $table->string('personel_code')->nullable();
+            $table->string('identity_no')->nullable();
+            $table->unsignedSmallInteger('birth_year')->nullable();
+            $table->unsignedTinyInteger('birth_month')->nullable();
+            $table->unsignedTinyInteger('birth_day')->nullable();
+            $table->date('birth_date')->nullable();
+            $table->tinyInteger('gender_code')->unsigned()->nullable();
 
-            $table->string('email')->unique();
+            $table->string('email')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
